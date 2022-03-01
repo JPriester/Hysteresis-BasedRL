@@ -16,7 +16,7 @@ def compute_observation(x, y, x_obst=1.5, y_obst=0., radius_obst=0.75,
                            dtype=np.float32)
     return observation
 
-def plot_policy(model, resolution=150, figure_number=1):
+def plot_policy(model, resolution=200, figure_number=1):
     plt.figure(figure_number)
     x_ = np.linspace(0, 3, resolution)
     y_ = np.linspace(-1.5, 1.5, resolution)
@@ -27,7 +27,7 @@ def plot_policy(model, resolution=150, figure_number=1):
             action, _ = model.predict(obs, deterministic=True)
             actions[idy, idx] = (action-2)/2
     x, y = np.meshgrid(x_, y_)
-    plt.scatter(x, y, s=15, c=actions)
+    plt.scatter(x, y, s=15, c=actions, rasterized=True)
     obstacle = matplotlib.patches.Circle((1.5,0.), radius=.75, color='gray')
     critical = matplotlib.patches.Circle((0.375,0.), radius=.375, color='red', 
                                          fill=None)
